@@ -10,4 +10,3 @@ Create venv
 
 4.`python3 main.py`
 
--Won YuvaAIThon
