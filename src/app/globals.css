@@ -1,0 +1,195 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-primary: #4ECDC4;
+  --color-secondary: #FF6B6B;
+  --color-accent: #FFE66D;
+  --color-bg-dark: #1a1a2e;
+  --color-bg-darker: #16162a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+body {
+  background: linear-gradient(135deg, var(--color-bg-darker) 0%, var(--color-bg-dark) 50%, #252538 100%);
+}
+
+/* Selection */
+::selection {
+  background: rgba(78, 205, 196, 0.3);
+  color: white;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-darker);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3db8b0;
+}
+
+/* Custom utilities */
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-400 to-accent-coral;
+  }
+  
+  .glass {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10;
+  }
+  
+  .glass-dark {
+    @apply bg-dark-400/80 backdrop-blur-xl border border-white/5;
+  }
+  
+  .glow-primary {
+    box-shadow: 0 0 30px rgba(78, 205, 196, 0.3), 0 0 60px rgba(78, 205, 196, 0.1);
+  }
+  
+  .glow-coral {
+    box-shadow: 0 0 30px rgba(255, 107, 107, 0.3), 0 0 60px rgba(255, 107, 107, 0.1);
+  }
+}
+
+/* Animation classes */
+@layer components {
+  .animate-in {
+    animation: animateIn 0.6s ease-out forwards;
+  }
+  
+  @keyframes animateIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .card-hover {
+    @apply transition-all duration-300 ease-out;
+  }
+  
+  .card-hover:hover {
+    @apply -translate-y-2;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 30px rgba(78, 205, 196, 0.2);
+  }
+  
+  .btn-primary {
+    @apply relative overflow-hidden px-8 py-4 rounded-2xl font-semibold text-lg;
+    @apply bg-gradient-to-r from-primary-400 to-primary-500;
+    @apply text-dark-400 transition-all duration-300;
+    @apply hover:shadow-lg hover:shadow-primary-400/30 hover:scale-105;
+    @apply active:scale-95;
+  }
+  
+  .btn-primary::before {
+    content: '';
+    @apply absolute inset-0 bg-white/20 translate-x-[-100%];
+    @apply transition-transform duration-500;
+  }
+  
+  .btn-primary:hover::before {
+    @apply translate-x-[100%];
+  }
+  
+  .exercise-card {
+    @apply relative p-6 rounded-3xl cursor-pointer;
+    @apply glass border-2 border-transparent;
+    @apply transition-all duration-300 ease-out;
+    @apply hover:border-primary-400/50 hover:-translate-y-2;
+    @apply hover:shadow-xl hover:shadow-primary-400/10;
+  }
+  
+  .exercise-card.selected {
+    @apply border-primary-400 bg-primary-400/10;
+    box-shadow: 0 0 30px rgba(78, 205, 196, 0.2), inset 0 0 30px rgba(78, 205, 196, 0.05);
+  }
+}
+
+/* VR Canvas styles */
+.vr-canvas {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  width: 100vw !important;
+  height: 100vh !important;
+  height: 100dvh !important;
+}
+
+/* Loading animation */
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 3px solid rgba(78, 205, 196, 0.2);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Breathing animation for exercises */
+.breathe-in {
+  animation: breatheIn 4s ease-in-out;
+}
+
+.breathe-out {
+  animation: breatheOut 4s ease-in-out;
+}
+
+@keyframes breatheIn {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.5); }
+}
+
+@keyframes breatheOut {
+  0% { transform: scale(1.5); }
+  100% { transform: scale(1); }
+}
+
+/* Pulse ring for targets */
+.pulse-ring {
+  animation: pulseRing 2s ease-out infinite;
+}
+
+@keyframes pulseRing {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
